@@ -40,8 +40,7 @@ class CalendarApp
     function display()
     {
 ?>
-年：<?= $this->display_year ?>
-月: <?= $this->display_month ?>
+<?= $this->display_year ?>年　<?= $this->display_month ?>月
 <?php
     }
 }
