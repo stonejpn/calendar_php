@@ -174,3 +174,90 @@ or on a per folder basis within the Vagrantfile:
   config.vm.synced_folder '/host/path', '/guest/path', SharedFoldersEnableSymlinksCreate: false
 ```
 
+
+
+### 実行環境はDockerへ移行
+
+当初から、最終形はDockerにする予定だったし、WSL2 + VirtualBoxですんなり起動しないので、このタイミングで実行環境をDockerに移行する。
+
+
+
+https://hub.docker.com/_/php
+
+```
+$ docker run -d -p 80:8001 --name apache-php -v "$PWD/htdocs:/var/www/html" php:8.3-apache
+```
+
+繋がらない。
+
+
+
+```
+$ docker run --rm -p 8000:80 --name apache-php -v "$PWD/htdocs:/var/www/html" php:8.3-apache
+```
+
+`-p`オプションは、ホスト:コンテナの順番だった
+
+
+
+bashを起動
+
+```
+$ docker exec -it <コンテナID> /bin/bash
+```
+
+
+
+/etc/apache2/sites-available/000-default.conf
+
+```
+<VirtualHost *:80>
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        #ServerName www.example.com
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+
+        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+        # error, crit, alert, emerg.
+        # It is also possible to configure the loglevel for particular
+        # modules, e.g.
+        #LogLevel info ssl:warn
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        # For most configuration files from conf-available/, which are
+        # enabled or disabled at a global level, it is possible to
+        # include a line for only one particular virtual host. For example the
+        # following line enables the CGI configuration for this host only
+        # after it has been globally disabled with "a2disconf".
+        #Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+```
+
+ドキュメントルートはハードコーディングされてるので、000-default.confは書き換える必要がある。
+
+
+
+docker/ディレクトリとDockerfileを用意
+
+```
+$ cd docker
+$ docker build -t php-app .
+```
+
+
+
+https://docs.docker.jp/engine/reference/commandline/build.html
+
+> 多くの場合、それぞれの Dockerfile を空のディレクトに入れるのがベストな方法です。それから、ディレクトリ内には Dockerfile の構築に必要なものしか置きません。構築のパフォーマンスを向上するには、 `.dockerignore` ファイルを設置し、特定のファイルやディレクトリを除外する設定が使えます。
+
+
+

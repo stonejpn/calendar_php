@@ -1,6 +1,6 @@
 <?php
 
-set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . "/../inc/");
+set_include_path(get_include_path() . PATH_SEPARATOR . realpath(__DIR__ . "/../inc/"));
 
 require_once "Calendar/CalendarApp.php";
 
