@@ -16,15 +16,22 @@ a:hover {
     font-size: 24pt;
     margin-top: 1rem;
     margin-left: 1rem;
+    text-align: center;
 }
 
 .switcher {
     margin: 1rem;
 }
 
-.container {
+.container-month {
     margin-left: 10%;
     width: 80%;
+    min-width: 640px;
+}
+
+.container-year {
+    margin-left: 5%;
+    width: 90%;
     min-width: 640px;
 }
 
@@ -42,7 +49,11 @@ a:hover {
 
 .container ul.navi li {
     display: inline-block;
-    width: 45%;
+    width: 30%;
+}
+
+.container ul.navi li.year {
+    text-align: center;
 }
 
 .container ul.navi li.next {
@@ -57,6 +68,7 @@ a:hover {
     border-bottom: #BBBBBB 1px solid;
     width: 13%;
     text-align: center;
+    padding: 0.4rem 0;
 }
 
 /* 日曜日 */
@@ -67,11 +79,6 @@ li.sunday {
 /* 土曜日 */
 li.saturday {
     background-color: #DDDDFF;
-}
-
-/* 祝日 */
-li.holiday {
-    background-color: #FFDDDD;
 }
 
 /* 週の終わり */
@@ -91,11 +98,49 @@ li.holiday {
     width: 13%;
 }
 
-.container ul.week li div.date {
-    padding: 0.4rem;
+.container-month ul.week li div.date {
+    padding: 0.4rem 1rem;
+    font-size: 14pt;
+}
+
+.container ul.week li.sunday {
+    background-color: #FFEEEE;
+}
+
+.container ul.week li.saturday {
+    background-color: #EEEEFF;
 }
 
 /* 日付マス 一番下のマス */
 .container ul.week li.last-week {
     border-bottom: #BBBBBB 1px solid;
+}
+
+/* 年間カレンダー */
+.container-year .year-row {
+    font-size: 12pt;
+}
+
+.container-year div.year-row div.month-container {
+    display: inline-block;
+    vertical-align: top;
+    width: 30%;
+    margin-bottom: 1rem;
+}
+
+.container-year div.year-row div.month-container div.month-name {
+    text-align: center;
+    font-size: 14pt;
+    margin: 0.4rem;
+}
+
+.container-year ul.week li div.date {
+    padding: 0.2rem 0.5rem;
+    font-size: 12pt;
+}
+
+/* エラー画面 */
+div.error {
+    margin: 1rem;
+    color: lightcoral;
 }

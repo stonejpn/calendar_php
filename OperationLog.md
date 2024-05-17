@@ -313,3 +313,12 @@ index.phpで、autoload.phpを読み込む
 
 ```
 
+
+
+## 休日カレンダー
+
+http://calendar.infocharge.net/cal/2015/
+
+ここが良さそう
+
+Googleカレンダーは、2015年の日本の休日が表示されない

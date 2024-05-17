@@ -1,15 +1,12 @@
 <?php
 namespace Calendar;
 
-use Calendar\WeekStartDate;
-use Calendar\DateCell;
-
 class MonthMatrix implements \IteratorAggregate
 {
     protected array $matrix;
     protected ?int $day_count;
 
-    function __construct(int $year, int $month, WeekStartDate $start_date)
+    public function __construct(ViewSettings $settings)
     {
         $END_OF_DAY = [
             /* １月 */ 31,
@@ -29,7 +26,7 @@ class MonthMatrix implements \IteratorAggregate
         $this->matrix = [];
 
         // 月初めの１日に設定
-        $first_day_time = strtotime(sprintf("%d/%02d/01", $year, $month));
+        $first_day_time = strtotime(sprintf("%d/%02d/01", $settings->getYear(), $settings->getMonth()));
         $first_day = localtime($first_day_time, true);
 
         /**
@@ -59,14 +56,14 @@ class MonthMatrix implements \IteratorAggregate
          * 　２　３　４　５　６　７　８　　--> フィラー６つ
          *
          */
-        $filler_count = ($start_date === WeekStartDate::Monday) ? ($first_day['tm_wday'] + 6) % 7 : $first_day['tm_wday'];
+        $filler_count = ($settings->getWeekStartDate() === WeekStartDate::Monday) ? ($first_day['tm_wday'] + 6) % 7 : $first_day['tm_wday'];
         while ($filler_count > 0) {
             $this->matrix[] = new DateCell(0, 0);
             $filler_count--;
         }
 
         // 月の日数を判定
-        $this->day_count = $END_OF_DAY[$month - 1];
+        $this->day_count = $END_OF_DAY[$settings->getMonth() - 1];
         if ($this->day_count === null)
         {
             /**
@@ -74,7 +71,7 @@ class MonthMatrix implements \IteratorAggregate
              *
              * 閏年の計算するより、「３月１日の前日」で判定してしまった方がわかりやすい
              */
-            $last_day_time = strtotime(sprintf("%d/%02d/01", $year, $month + 1)) - 86400;
+            $last_day_time = strtotime(sprintf("%d/%02d/01", $settings->getYear(), $settings->getMonth() + 1)) - 86400;
             $last_day = localtime($last_day_time, true);
             $this->day_count = $last_day['tm_mday'];
         }
@@ -89,12 +86,12 @@ class MonthMatrix implements \IteratorAggregate
         }
     }
 
-    function getIterator(): \ArrayIterator
+    public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->matrix);
     }
 
-    function getCount(): int {
+    public function getCount(): int {
         return count($this->matrix);
     }
 }
