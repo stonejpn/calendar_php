@@ -261,3 +261,55 @@ https://docs.docker.jp/engine/reference/commandline/build.html
 
 
 
+
+
+## PHPでの実装
+
+`use`と`require_once`を両方記述するのは、うざい。
+
+https://stackoverflow.com/questions/6961914/class-not-found-using-use
+
+オートローダーで解決する
+
+自作でも作れるけど、composer使っちゃう方が楽
+
+```
+$ sudo dnf install composer
+```
+
+
+
+composer.json
+
+```
+{
+  "autoload": {
+    "psr-4": {
+      "Calendar\\": "inc/"
+    }
+  }
+}
+```
+
+
+
+autoload.phpを作成
+
+```
+$ composer update
+```
+
+
+
+index.phpで、autoload.phpを読み込む
+
+```diff
+-set_include_path(get_include_path() . PATH_SEPARATOR . realpath(__DIR__ . "/../inc/"));
+-
+-require_once "Calendar/CalendarApp.php";
++require_once "../vendor/autoload.php";
+
+ use \Calendar\CalendarApp;
+
+```
+
