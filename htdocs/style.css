@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+body {
+    line-height: 135%;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.title {
+    font-size: 24pt;
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.switcher {
+    margin: 1rem;
+}
+
+.container {
+    margin-left: 10%;
+    width: 80%;
+    min-width: 640px;
+}
+
+.container ul {
+    width: 100%;
+    padding-left: 1rem; /* デフォルトが40pxに設定されているで上書きする */
+}
+
+/* 前の月、次の月 */
+.container ul.navi {
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.container ul.navi li {
+    display: inline-block;
+    width: 45%;
+}
+
+.container ul.navi li.next {
+    text-align: right;
+}
+
+/* 曜日の表示 */
+.container ul.day-of-week-header li {
+    display: inline-block;
+    border-top: #BBBBBB 1px solid;
+    border-left: #BBBBBB 1px solid;
+    border-bottom: #BBBBBB 1px solid;
+    width: 13%;
+    text-align: center;
+}
+
+/* 日曜日 */
+li.sunday {
+    background-color: #FFDDDD;
+}
+
+/* 土曜日 */
+li.saturday {
+    background-color: #DDDDFF;
+}
+
+/* 祝日 */
+li.holiday {
+    background-color: #FFDDDD;
+}
+
+/* 週の終わり */
+.container ul li.last-day-of-week {
+    border-right: #BBBBBB 1px solid;
+}
+
+/* 日付マス */
+.container ul.week {
+    margin: 0;
+}
+
+.container ul.week li {
+    display: inline-block;
+    border-top: #BBBBBB 1px solid;
+    border-left: #BBBBBB 1px solid;
+    width: 13%;
+}
+
+.container ul.week li div.date {
+    padding: 0.4rem;
+}
+
+/* 日付マス 一番下のマス */
+.container ul.week li.last-week {
+    border-bottom: #BBBBBB 1px solid;
+}

@@ -1,10 +1,7 @@
 <?php
 
-set_include_path(get_include_path() . PATH_SEPARATOR . realpath(__DIR__ . "/../inc/"));
+require_once __DIR__ . "/../vendor/autoload.php";
 
-require_once "Calendar/CalendarApp.php";
-
-use \Calendar\CalendarApp;
-
-$app = new CalendarApp();
+$path_info = array_key_exists('PATH_INFO', $_SERVER) ? $_SERVER['PATH_INFO'] : '';
+$app = new \Calendar\CalendarApp($path_info);
 $app->display();
