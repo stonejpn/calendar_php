@@ -86,12 +86,35 @@ class MonthMatrix implements \IteratorAggregate
         }
     }
 
+    public function display(ViewSettings $settings): void
+    {
+        print '<div class="month-container">';
+        if ($settings->getViewType() === ViewType::Year) {
+            print "<div class=\"month-name\"><a href=\"/{$settings->getYear()}/{$settings->getMonth()}\">{$settings->getMonth()}月</a></div>";
+        }
+
+        $last_week_day = $this->getCount() - 7;
+        foreach ($this->matrix as $i => $date_cell) {
+            /** @var DateCell $date_cell */
+
+            if (($i % 7) === 0) {
+                print '<ul class="week">';
+            }
+            $date_cell->display($settings->getViewType(), ($i % 7) === 6, $i >= $last_week_day);
+            if (($i % 7) === 6) {
+                print '</ul>';
+            }
+        }
+        print '</div>';
+    }
+
     public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->matrix);
     }
 
-    public function getCount(): int {
+    public function getCount(): int
+    {
         return count($this->matrix);
     }
 }
