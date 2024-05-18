@@ -48,4 +48,8 @@ class ViewSettings
         return $this->week_start_date;
     }
 
+    public function modifyMonth($month):ViewSettings
+    {
+        return new self($this->year, $month, $this->view_type, $this->week_start_date);
+    }
 }
