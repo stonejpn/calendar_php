@@ -32,7 +32,7 @@ a:hover {
 .container-year {
     margin-left: 5%;
     width: 90%;
-    min-width: 640px;
+    min-width: 960px;
 }
 
 .container ul {
@@ -61,6 +61,10 @@ a:hover {
 }
 
 /* 曜日の表示 */
+.container ul.day-of-week-header {
+    margin-bottom: 0.4rem;
+}
+
 .container ul.day-of-week-header li {
     display: inline-block;
     border-top: #BBBBBB 1px solid;
