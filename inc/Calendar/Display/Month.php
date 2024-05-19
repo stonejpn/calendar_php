@@ -7,7 +7,7 @@ use Calendar\WeekStartDate;
 
 class Month extends Page
 {
-    protected function getTitle(ViewSettings $settings):string
+    protected function getTitle(ViewSettings $settings): string
     {
         return "{$settings->getYear()}年 {$settings->getMonth()}月";
     }
@@ -42,7 +42,7 @@ class Month extends Page
         return [$prev_buffer, $center_buffer, $next_buffer];
     }
 
-    protected function content(ViewSettings $settings, array $holidays):void
+    protected function content(ViewSettings $settings, array $holidays): void
     {
         // 曜日名ヘッダー
         print <<<EOD

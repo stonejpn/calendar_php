@@ -6,7 +6,7 @@ use Calendar\ViewSettings;
 class ErrorPage
 {
     /** エラーを表示 */
-    public static function display(ViewSettings $settings, string $error_message):void
+    public static function display(ViewSettings $settings, string $error_message): void
     {
         print <<<EOD
 <!doctype html>

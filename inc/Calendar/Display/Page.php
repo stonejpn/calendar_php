@@ -19,7 +19,7 @@ abstract class Page
         };
     }
 
-    public function display(ViewSettings $settings, array $holidays):void
+    public function display(ViewSettings $settings, array $holidays): void
     {
         // ページのタイトルまで出力
         print <<<EOD
@@ -61,9 +61,9 @@ EOD;
 EOD;
     }
 
-    abstract protected function getTitle(ViewSettings $settings):string;
-    abstract protected function getNaviContent(ViewSettings $settings):array;
-    abstract protected function content(ViewSettings $settings, array $holidays):void;
+    abstract protected function getTitle(ViewSettings $settings): string;
+    abstract protected function getNaviContent(ViewSettings $settings): array;
+    abstract protected function content(ViewSettings $settings, array $holidays): void;
 
     protected function currentMonthLink(ViewSettings $settings): void
     {
@@ -80,7 +80,7 @@ EOD;
         }
     }
 
-    protected function navigation(ViewSettings $settings):void
+    protected function navigation(ViewSettings $settings): void
     {
         [$prev, $center, $next] = $this->getNaviContent($settings);
 
@@ -93,7 +93,7 @@ EOD;
 EOD;
     }
 
-    protected function switcher(ViewSettings $settings):void
+    protected function switcher(ViewSettings $settings): void
     {
         $sunday_checked = $monday_checked = '';
         switch ($settings->getWeekStartDate()) {

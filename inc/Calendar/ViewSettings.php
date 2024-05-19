@@ -19,7 +19,7 @@ class ViewSettings
     /**
      * @return int
      */
-    public function getYear():int
+    public function getYear(): int
     {
         return $this->year;
     }
@@ -27,7 +27,7 @@ class ViewSettings
     /**
      * @return int
      */
-    public function getMonth():int
+    public function getMonth(): int
     {
         return $this->month;
     }
@@ -35,7 +35,7 @@ class ViewSettings
     /**
      * @return ViewType
      */
-    public function getViewType():ViewType
+    public function getViewType(): ViewType
     {
         return $this->view_type;
     }
@@ -48,7 +48,7 @@ class ViewSettings
         return $this->week_start_date;
     }
 
-    public function modifyMonth($month):ViewSettings
+    public function modifyMonth($month): ViewSettings
     {
         return new self($this->year, $month, $this->view_type, $this->week_start_date);
     }
