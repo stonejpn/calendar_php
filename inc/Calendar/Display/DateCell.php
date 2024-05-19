@@ -1,8 +1,6 @@
 <?php
 namespace Calendar\Display;
 
-use Calendar\ViewType;
-
 class DateCell
 {
     protected int $day_of_month;
@@ -16,11 +14,11 @@ class DateCell
         $this->holiday_name = $holiday_name;
     }
 
-    public function display(ViewType $view_type): void
+    public function display(): void
     {
         if ($this->day_of_month === 0) {
             // フィラー、空白マス
-            print "<li class='filler'><div class='day-of-month'>&nbsp;</div><div class='holiday-name'>&nbsp;</div></li>";
+            print "<li class='filler'><div class='day-of-month'></div><div class='holiday-name'></div></li>";
             return;
         }
 

@@ -10,13 +10,12 @@ abstract class Page
     protected const MIN_YEAR = 2015;
     protected const MAX_YEAR = 2034;
 
-    public static function create(ViewSettings $settings): ?Page
+    public static function create(ViewSettings $settings): Page
     {
         // match式は、PHP8以上の書式
         return match ($settings->getViewType()) {
             ViewType::Year => new Year(),
             ViewType::Month => new Month(),
-            default => throw new \RuntimeException('Unknown ViewType ' . $settings->getViewType()),
         };
     }
 

@@ -91,7 +91,6 @@ EOD;
 EOD;
         }
 
-        $last_week_day = count($this->matrix) - 7;
         foreach ($this->matrix as $i => $date_cell) {
             /** @var DateCell $date_cell */
 
@@ -102,7 +101,8 @@ EOD;
 EOD;
             }
 
-            $date_cell->display($settings->getViewType(), $i >= $last_week_day);
+            // 日付セルを表示
+            $date_cell->display();
 
             if (($i % 7) === 6) {
                 // 週末
@@ -112,7 +112,7 @@ EOD;
             }
         }
         print <<<EOD
-</div>
+</div><!-- div.month-matrix -->
 EOD;
     }
 }
