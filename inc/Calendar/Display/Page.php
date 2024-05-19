@@ -20,10 +20,22 @@ abstract class Page
         };
     }
 
-    public function display(ViewSettings $settings):void
+    public function display(ViewSettings $settings, array $holidays):void
     {
-        $this->headerFragment($this->getTitle($settings));
+        // ページのタイトルまで出力
+        print <<<EOD
+<!doctype html>
+<html lang="ja">
+<head>
+  <title>カレンダー {$this->getTitle($settings)}</title>
+  <link rel="stylesheet" href="/style.css" type="text/css" />
+  <script src="/calendar.js"></script>
+</head>
+<body class="calendar">
+  <div class="title">{$this->getTitle($settings)}</div>
+EOD;
 
+        // コンテナ
         $css_class = '';
         switch ($settings->getViewType()) {
             case ViewType::Year:
@@ -40,7 +52,7 @@ EOD;
         $this->navigation($settings);
         $this->switcher($settings);
 
-        $this->content($settings);
+        $this->content($settings, $holidays);
 
         print <<<EOD
 </div> <!-- div.container -->
@@ -51,22 +63,7 @@ EOD;
 
     abstract protected function getTitle(ViewSettings $settings):string;
     abstract protected function getNaviContent(ViewSettings $settings):array;
-    abstract protected function content(ViewSettings $settings):void;
-
-    protected function headerFragment(string $title):void
-    {
-        print <<<EOD
-<!doctype html>
-<html lang="ja">
-<head>
-  <title>カレンダー $title</title>
-  <link rel="stylesheet" href="/style.css" type="text/css" />
-  <script src="/calendar.js"></script>
-</head>
-<body class="calendar">
-  <div class="title">$title</div>
-EOD;
-    }
+    abstract protected function content(ViewSettings $settings, array $holidays):void;
 
     protected function navigation(ViewSettings $settings):void
     {

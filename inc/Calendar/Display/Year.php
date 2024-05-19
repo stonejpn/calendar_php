@@ -27,7 +27,7 @@ class Year extends Page
         return [$prev_buffer, '<br/>', $next_buffer];
     }
 
-    protected function content(ViewSettings $settings):void
+    protected function content(ViewSettings $settings, array $holidays):void
     {
         // ３X４で表示させる
         for ($month = 1; $month <= 12; $month++) {
@@ -36,7 +36,7 @@ class Year extends Page
             }
 
             $this_month = $settings->modifyMonth($month);
-            $matrix = new MonthMatrix($this_month);
+            $matrix = new MonthMatrix($this_month, $holidays);
             $matrix->display($this_month);
 
             if (($month % 3) === 0) {

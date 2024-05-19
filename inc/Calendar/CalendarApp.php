@@ -19,7 +19,7 @@ class CalendarApp
         $month = $today['tm_mon'] + 1;
 
 
-        if ($start_date !== 'sunday'&& $start_date !== 'monday') {
+        if (strlen($start_date) && $start_date !== 'sunday' && $start_date !== 'monday') {
             throw new \RuntimeException('週の始まり：sunday/monday以外の文字列が指定されています');
         }
 
@@ -52,7 +52,11 @@ class CalendarApp
     {
         $page = Display\Page::create($this->settings);
         if ($page !== null) {
-            $page->display($this->settings);
+            // 休日ファイルを読み込み
+            $holidays_json = file_get_contents(__DIR__ . '/../holidays.json');
+            $holidays = json_decode($holidays_json, true);
+
+            $page->display($this->settings, $holidays[(string) $this->settings->getYear()]);
         } else {
             Display\ErrorPage::display($this->settings, '不正なViewTypeの値です');
         }

@@ -16,22 +16,11 @@ class DateCell
         $this->holiday_name = $holiday_name;
     }
 
-    public function display(ViewType $view_type, bool $is_last_day_of_week, bool $is_last_week): void
+    public function display(ViewType $view_type): void
     {
-        $br_buffer = "";
-        if ($view_type === ViewType::Month) {
-            $br_buffer = '<br/>';
-        }
         if ($this->day_of_month === 0) {
             // フィラー、空白マス
-            $css_class = '';
-            if ($is_last_day_of_week) {
-                $css_class .= " last-day-of-week";
-            }
-            if ($is_last_week) {
-                $css_class .= " last-week";
-            }
-            print "<li class=\"$css_class\"><div class=\"date\"><br/><br/>$br_buffer</div></li>";
+            print "<li class='filler'><div class='day-of-month'>&nbsp;</div><div class='holiday-name'>&nbsp;</div></li>";
             return;
         }
 
@@ -42,18 +31,14 @@ class DateCell
         } elseif ($this->day_of_week === 6) {
             $css_class[] = 'saturday';
         }
-        // 一番右側のマスには、last-day-of-weekをつける
-        if ($is_last_day_of_week) {
-            $css_class[] = " last-day-of-week";
-        }
-        // 一番下のマスには、last-weekをつける
-        if ($is_last_week) {
-            $css_class[] = " last-week";
+        if ($this->holiday_name !== '') {
+            $css_class[] = 'holiday';
         }
         $css_class_str = join(' ', $css_class);
 
+        $holiday_name = $this->holiday_name ?: '&nbsp';
         print <<<EOD
-<li class="$css_class_str"><div class="date">$this->day_of_month<br/>$this->holiday_name<br/>$br_buffer</div></li>
+<li class="$css_class_str"><div class="day-of-month">$this->day_of_month</div><div class="holiday-name">$holiday_name</div></li>
 EOD;
     }
 }

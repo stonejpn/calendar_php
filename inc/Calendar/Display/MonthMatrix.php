@@ -46,7 +46,7 @@ class MonthMatrix
     protected array $matrix;
     protected ?int $day_count;
 
-    public function __construct(ViewSettings $settings)
+    public function __construct(ViewSettings $settings, array $holidays)
     {
         $this->matrix = [];
 
@@ -65,7 +65,12 @@ class MonthMatrix
         $this->day_count = (int) $first_day->modify('last day of')->format('j');
 
         for ($day = 1; $day <= $this->day_count; $day++) {
-            $this->matrix[] = new DateCell($day, ($day_of_week + $day - 1) % 7);
+            $holiday_key = sprintf("%02d%02d", $settings->getMonth(), $day);
+            $this->matrix[] = new DateCell(
+                $day,
+                ($day_of_week + $day - 1) % 7,
+                array_key_exists($holiday_key, $holidays) ? $holidays[$holiday_key] : ''
+            );
         }
 
         // 月末より後も、１週間分マスがあるように空白セルで埋める
@@ -77,7 +82,7 @@ class MonthMatrix
     public function display(ViewSettings $settings): void
     {
         print <<<EOD
-<div class="month-container">
+<div class="month-matrix">
 EOD;
         if ($settings->getViewType() === ViewType::Year) {
             // 年間カレンダーでは、月名と月別カレンダーへのリンクを表示
@@ -97,7 +102,7 @@ EOD;
 EOD;
             }
 
-            $date_cell->display($settings->getViewType(), ($i % 7) === 6, $i >= $last_week_day);
+            $date_cell->display($settings->getViewType(), $i >= $last_week_day);
 
             if (($i % 7) === 6) {
                 // 週末

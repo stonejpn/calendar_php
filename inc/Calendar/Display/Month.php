@@ -42,7 +42,7 @@ class Month extends Page
         return [$prev_buffer, $center_buffer, $next_buffer];
     }
 
-    protected function content(ViewSettings $settings):void
+    protected function content(ViewSettings $settings, array $holidays):void
     {
         // 曜日名ヘッダー
         print <<<EOD
@@ -77,7 +77,7 @@ EOD;
 EOD;
 
         // 日付セルを表示
-        $matrix = new MonthMatrix($settings);
+        $matrix = new MonthMatrix($settings, $holidays);
         $matrix->display($settings);
     }
 }

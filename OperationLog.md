@@ -315,10 +315,43 @@ index.phpで、autoload.phpを読み込む
 
 
 
-## 休日カレンダー
+## 休日表示
 
 http://calendar.infocharge.net/cal/2015/
 
 ここが良さそう
 
 Googleカレンダーは、2015年の日本の休日が表示されない
+
+
+
+### 表示がずれる
+
+日付のあるセルとフィラーのセルで、高さが微妙に違う。
+
+そのため、各セルに引いてるborderがずれる。
+
+
+
+googleカレンダは？　---> 全部、divでした。
+
+月のdiv
+
+````
+display: flex;
+flex-direction: column;
+````
+
+週間div (role=row)
+
+```
+display: flex;
+flext: 1 1 0
+```
+
+日付セル(div)
+
+```
+flex: 1 1 0%;
+```
+
