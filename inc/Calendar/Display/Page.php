@@ -49,6 +49,7 @@ EOD;
 <div class="container $css_class">
 EOD;
 
+        $this->currentMonthLink($settings);
         $this->navigation($settings);
         $this->switcher($settings);
 
@@ -64,6 +65,21 @@ EOD;
     abstract protected function getTitle(ViewSettings $settings):string;
     abstract protected function getNaviContent(ViewSettings $settings):array;
     abstract protected function content(ViewSettings $settings, array $holidays):void;
+
+    protected function currentMonthLink(ViewSettings $settings): void
+    {
+        $today = new \DateTimeImmutable();
+
+        if (($settings->getViewType() == ViewType::Year)
+            || ($settings->getYear() != $today->format("Y")
+                || $settings->getMonth() != $today->format("n"))
+        ) {
+            // 「今月に移動」を表示
+            print <<<EOD
+<div class='current-month'><a href='/'>今月を表示</a></div>
+EOD;
+        }
+    }
 
     protected function navigation(ViewSettings $settings):void
     {

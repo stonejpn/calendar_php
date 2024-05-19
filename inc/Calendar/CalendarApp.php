@@ -14,9 +14,9 @@ class CalendarApp
         $view_type = ViewType::Month;
 
         // 現在の年月
-        $today = localtime(null, true);
-        $year = 1900 + $today['tm_year'];
-        $month = $today['tm_mon'] + 1;
+        $today = new \DateTimeImmutable();
+        $year = $today->format("Y");
+        $month = $today->format("n");
 
 
         if (strlen($start_date) && $start_date !== 'sunday' && $start_date !== 'monday') {

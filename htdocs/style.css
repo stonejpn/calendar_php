@@ -41,6 +41,20 @@ a:hover {
     padding-left: 0; /* デフォルトが40pxに設定されているで上書きする */
 }
 
+/* 「今月を表示」のリンク */
+.container .current-month {
+    position: absolute;
+    top: 1rem;
+}
+
+.container-year .current-month {
+    right: 7%;
+}
+
+.container-month .current-month {
+    right: 12%;
+}
+
 /* 前の月、次の月 */
 .container ul.navi {
     display: flex;
