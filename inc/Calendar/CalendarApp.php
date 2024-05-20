@@ -51,14 +51,11 @@ class CalendarApp
     public function display(): void
     {
         $page = Display\Page::create($this->settings);
-        if ($page !== null) {
-            // 休日ファイルを読み込み
-            $holidays_json = file_get_contents(__DIR__ . '/../holidays.json');
-            $holidays = json_decode($holidays_json, true);
 
-            $page->display($this->settings, $holidays[(string) $this->settings->getYear()]);
-        } else {
-            Display\ErrorPage::display($this->settings, '不正なViewTypeの値です');
-        }
+        // 休日ファイルを読み込み
+        $holidays_json = file_get_contents(__DIR__ . '/../holidays.json');
+        $holidays = json_decode($holidays_json, true);
+
+        $page->display($this->settings, $holidays[(string) $this->settings->getYear()]);
     }
 }
