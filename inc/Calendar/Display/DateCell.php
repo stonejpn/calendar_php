@@ -18,7 +18,9 @@ class DateCell
     {
         if ($this->day_of_month === 0) {
             // フィラー、空白マス
-            print "<li class='filler'><div class='day-of-month'></div><div class='holiday-name'></div></li>";
+            print <<<EOD
+<li class='filler'><div class='day-of-month'></div><div class='holiday-name'></div></li>
+EOD;
             return;
         }
 

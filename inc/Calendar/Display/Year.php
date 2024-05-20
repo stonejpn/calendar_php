@@ -32,7 +32,9 @@ class Year extends Page
         // ３X４で表示させる
         for ($month = 1; $month <= 12; $month++) {
             if (($month % 3) === 1) {
-                print '<div class="year-row">';
+                print <<<EOD
+<div class="year-row">
+EOD;
             }
 
             $this_month = $settings->modifyMonth($month);
@@ -40,8 +42,9 @@ class Year extends Page
             $matrix->display($this_month);
 
             if (($month % 3) === 0) {
-                // year-row
-                print '</div>';
+                print <<<EOD
+</div><!-- .year-row -->
+EOD;
             }
         }
     }
