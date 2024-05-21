@@ -1,8 +1,8 @@
 <?php
 namespace Calendar;
 
-enum WeekStartDate
+class WeekStartDate
 {
-    case Sunday;
-    case Monday;
+    public const SUNDAY = 'sunday';
+    public const MONDAY = 'monday';
 }

@@ -11,7 +11,7 @@ class CalendarApp
      */
     public function __construct(string $path_info, string $start_date)
     {
-        $view_type = ViewType::Month;
+        $view_type = ViewType::MONTH;
 
         // 現在の年月
         $today = new \DateTimeImmutable();
@@ -19,7 +19,11 @@ class CalendarApp
         $month = $today->format("n");
 
 
-        if (strlen($start_date) && $start_date !== 'sunday' && $start_date !== 'monday') {
+        if (
+            strlen($start_date)
+            && $start_date != WeekStartDate::SUNDAY
+            && $start_date != WeekStartDate::MONDAY
+        ) {
             throw new \RuntimeException('週の始まり：sunday/monday以外の文字列が指定されています');
         }
 
@@ -27,12 +31,12 @@ class CalendarApp
             // '' と null はstrlenが0になる
             $elem = explode('/', $path_info);
 
-            $year = $elem[1];
+            $year = (int) $elem[1];
             if ($year < 2015 || $year > 2034) {
                 throw new \RuntimeException('表示範囲外の年月が指定されました');
             }
             if (!array_key_exists(2, $elem) || strlen($elem[2]) === 0) {
-                $view_type = ViewType::Year;
+                $view_type = ViewType::YEAR;
             } else {
                 $month = $elem[2];
 
@@ -42,7 +46,7 @@ class CalendarApp
             }
         }
 
-        $this->settings = new ViewSettings($year, $month, $view_type, $start_date === 'monday' ? WeekStartDate::Monday : WeekStartDate::Sunday);
+        $this->settings = new ViewSettings($year, $month, $view_type, $start_date === 'monday' ? WeekStartDate::MONDAY : WeekStartDate::SUNDAY);
     }
 
     /**
@@ -51,14 +55,11 @@ class CalendarApp
     public function display(): void
     {
         $page = Display\Page::create($this->settings);
-        if ($page !== null) {
-            // 休日ファイルを読み込み
-            $holidays_json = file_get_contents(__DIR__ . '/../holidays.json');
-            $holidays = json_decode($holidays_json, true);
 
-            $page->display($this->settings, $holidays[(string) $this->settings->getYear()]);
-        } else {
-            Display\ErrorPage::display($this->settings, '不正なViewTypeの値です');
-        }
+        // 休日ファイルを読み込み
+        $holidays_json = file_get_contents(__DIR__ . '/../holidays.json');
+        $holidays = json_decode($holidays_json, true);
+
+        $page->display($this->settings, $holidays[(string) $this->settings->getYear()]);
     }
 }

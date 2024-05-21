@@ -183,9 +183,3 @@ div.month-matrix ul.week .holiday-name {
 .container-year ul.week li .holiday-name {
     display: none;
 }
-
-/* エラー画面 */
-div.error {
-    margin: 1rem;
-    color: lightcoral;
-}

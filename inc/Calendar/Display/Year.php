@@ -6,12 +6,12 @@ use Calendar\ViewSettings;
 
 class Year extends Page
 {
-    protected function getTitle(ViewSettings $settings):string
+    protected function getTitle(ViewSettings $settings): string
     {
         return "{$settings->getYear()}年";
     }
 
-    protected function getNaviContent(ViewSettings $settings):array
+    protected function getNaviContent(ViewSettings $settings): array
     {
         $prev_buffer = '<br/>';
         if ($settings->getYear() > self::MIN_YEAR) {
@@ -27,12 +27,14 @@ class Year extends Page
         return [$prev_buffer, '<br/>', $next_buffer];
     }
 
-    protected function content(ViewSettings $settings, array $holidays):void
+    protected function content(ViewSettings $settings, array $holidays): void
     {
         // ３X４で表示させる
         for ($month = 1; $month <= 12; $month++) {
             if (($month % 3) === 1) {
-                print '<div class="year-row">';
+                print <<<EOD
+<div class="year-row">
+EOD;
             }
 
             $this_month = $settings->modifyMonth($month);
@@ -40,8 +42,9 @@ class Year extends Page
             $matrix->display($this_month);
 
             if (($month % 3) === 0) {
-                // year-row
-                print '</div>';
+                print <<<EOD
+</div><!-- .year-row -->
+EOD;
             }
         }
     }

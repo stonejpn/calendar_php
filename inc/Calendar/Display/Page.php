@@ -10,17 +10,16 @@ abstract class Page
     protected const MIN_YEAR = 2015;
     protected const MAX_YEAR = 2034;
 
-    public static function create(ViewSettings $settings): ?Page
+    public static function create(ViewSettings $settings): Page
     {
         // match式は、PHP8以上の書式
         return match ($settings->getViewType()) {
-            ViewType::Year => new Year(),
-            ViewType::Month => new Month(),
-            default => throw new \RuntimeException('Unknown ViewType ' . $settings->getViewType()),
+            ViewType::YEAR => new Year(),
+            ViewType::MONTH => new Month(),
         };
     }
 
-    public function display(ViewSettings $settings, array $holidays):void
+    public function display(ViewSettings $settings, array $holidays): void
     {
         // ページのタイトルまで出力
         print <<<EOD
@@ -38,10 +37,10 @@ EOD;
         // コンテナ
         $css_class = '';
         switch ($settings->getViewType()) {
-            case ViewType::Year:
+            case ViewType::YEAR:
                 $css_class = 'container-year';
                 break;
-            case ViewType::Month:
+            case ViewType::MONTH:
                 $css_class = 'container-month';
                 break;
         }
@@ -62,15 +61,15 @@ EOD;
 EOD;
     }
 
-    abstract protected function getTitle(ViewSettings $settings):string;
-    abstract protected function getNaviContent(ViewSettings $settings):array;
-    abstract protected function content(ViewSettings $settings, array $holidays):void;
+    abstract protected function getTitle(ViewSettings $settings): string;
+    abstract protected function getNaviContent(ViewSettings $settings): array;
+    abstract protected function content(ViewSettings $settings, array $holidays): void;
 
     protected function currentMonthLink(ViewSettings $settings): void
     {
         $today = new \DateTimeImmutable();
 
-        if (($settings->getViewType() == ViewType::Year)
+        if (($settings->getViewType() == ViewType::YEAR)
             || ($settings->getYear() != $today->format("Y")
                 || $settings->getMonth() != $today->format("n"))
         ) {
@@ -81,7 +80,7 @@ EOD;
         }
     }
 
-    protected function navigation(ViewSettings $settings):void
+    protected function navigation(ViewSettings $settings): void
     {
         [$prev, $center, $next] = $this->getNaviContent($settings);
 
@@ -94,14 +93,14 @@ EOD;
 EOD;
     }
 
-    protected function switcher(ViewSettings $settings):void
+    protected function switcher(ViewSettings $settings): void
     {
         $sunday_checked = $monday_checked = '';
         switch ($settings->getWeekStartDate()) {
-            case WeekStartDate::Sunday:
+            case WeekStartDate::SUNDAY:
                 $sunday_checked = 'checked';
                 break;
-            case WeekStartDate::Monday:
+            case WeekStartDate::MONDAY:
                 $monday_checked = 'checked';
                 break;
         }
