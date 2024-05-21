@@ -44,7 +44,6 @@ use Calendar\ViewType;
 class MonthMatrix
 {
     protected array $matrix;
-    protected ?int $day_count;
 
     public function __construct(ViewSettings $settings, array $holidays)
     {
@@ -62,9 +61,9 @@ class MonthMatrix
         }
 
         // `last day of`で月末の日付を取得
-        $this->day_count = (int) $first_day->modify('last day of')->format('j');
+        $last_day_of_month = (int) $first_day->modify('last day of')->format('j');
 
-        for ($day = 1; $day <= $this->day_count; $day++) {
+        for ($day = 1; $day <= $last_day_of_month; $day++) {
             $holiday_key = sprintf("%02d%02d", $settings->getMonth(), $day);
             $this->matrix[] = new DateCell(
                 $day,

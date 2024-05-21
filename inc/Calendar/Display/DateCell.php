@@ -36,7 +36,7 @@ EOD;
         }
         $css_class_str = join(' ', $css_class);
 
-        $holiday_name = $this->holiday_name ?: '&nbsp';
+        $holiday_name = $this->holiday_name ?: '&nbsp;';
         print <<<EOD
 <li class="$css_class_str"><div class="day-of-month">$this->day_of_month</div><div class="holiday-name">$holiday_name</div></li>
 EOD;
