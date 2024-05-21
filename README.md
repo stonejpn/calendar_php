@@ -128,4 +128,4 @@ PSR-12に準拠
 
 #### 休日データ
 
-http://calendar.infocharge.net/を参考して、JSONデータを作成した。
+http://calendar.infocharge.net/ を参考して、JSONデータを作成した。
