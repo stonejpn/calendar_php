@@ -13,8 +13,6 @@
 * URLで表示する年月を指定できる
   * 月別 2024年1月：`/2024/01`
   * 年別 2024年：`/2024`
-* 対応ブラウザ
-  * Chrome
 
 
 
@@ -28,7 +26,7 @@ http://localhost:8000/で表示させる
 
 必要なソフトウェア
 
-* Composer
+* PHP + Composer
 * Docker
 
 
@@ -52,7 +50,7 @@ $ cd (プロジェクトROOT)
 # Dockerイメージを作成
 $ ./build.sh
 
-# サーバーを起動
+# コンテナを起動
 $ ./start.sh
 ```
 
@@ -64,7 +62,7 @@ $ ./start.sh
 
 Windows11のWSL2にインストールされたAlmaLinux9上で、開発を行った。
 
-エディタは、IntelliJ IDEAを使用した。
+エディタは、Windows上のIntelliJ IDEAを使用した。
 
 検証ブラウザは、
 
@@ -82,9 +80,9 @@ Windows11のWSL2にインストールされたAlmaLinux9上で、開発を行っ
 
 今日的には、nginx + php-fpm組み合わせなのだろうが、Apacheでは１つのDockerイメージで実装できるため、Apache + mod_phpを選択。
 
-ベースイメージは、`php:8.3-apache`。
+ベースイメージは、`php:8.0-apache`。
 
-Apacheは2.4.59、PHPは8.3.7となっている。
+Apacheは2.4.56、PHPは8.0.30となっている。
 
 
 
