@@ -14,8 +14,8 @@ abstract class Page
     {
         // match式は、PHP8以上の書式
         return match ($settings->getViewType()) {
-            ViewType::Year => new Year(),
-            ViewType::Month => new Month(),
+            ViewType::YEAR => new Year(),
+            ViewType::MONTH => new Month(),
         };
     }
 
@@ -37,10 +37,10 @@ EOD;
         // コンテナ
         $css_class = '';
         switch ($settings->getViewType()) {
-            case ViewType::Year:
+            case ViewType::YEAR:
                 $css_class = 'container-year';
                 break;
-            case ViewType::Month:
+            case ViewType::MONTH:
                 $css_class = 'container-month';
                 break;
         }
@@ -69,7 +69,7 @@ EOD;
     {
         $today = new \DateTimeImmutable();
 
-        if (($settings->getViewType() == ViewType::Year)
+        if (($settings->getViewType() == ViewType::YEAR)
             || ($settings->getYear() != $today->format("Y")
                 || $settings->getMonth() != $today->format("n"))
         ) {
@@ -97,10 +97,10 @@ EOD;
     {
         $sunday_checked = $monday_checked = '';
         switch ($settings->getWeekStartDate()) {
-            case WeekStartDate::Sunday:
+            case WeekStartDate::SUNDAY:
                 $sunday_checked = 'checked';
                 break;
-            case WeekStartDate::Monday:
+            case WeekStartDate::MONDAY:
                 $monday_checked = 'checked';
                 break;
         }

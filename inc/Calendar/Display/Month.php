@@ -56,12 +56,12 @@ EOD;
             $header_list[] = ['label' => $label, 'css_styles' => []];
         }
         switch ($settings->getWeekStartDate()) {
-            case WeekStartDate::Sunday:
+            case WeekStartDate::SUNDAY:
                 // 日曜日を先頭に
                 array_unshift($header_list, ["label" => '日', "css_styles" => ['sunday']]);
                 $header_list[] = ['label' => '土', 'css_styles' => ['saturday', 'last-day-of-week']];
                 break;
-            case WeekStartDate::Monday:
+            case WeekStartDate::MONDAY:
                 $header_list[] = ['label' => '土', 'css_styles' => ['saturday']];
                 $header_list[] = ['label' => '日', 'css_styles' => ['sunday', 'last-day-of-week']];
                 break;

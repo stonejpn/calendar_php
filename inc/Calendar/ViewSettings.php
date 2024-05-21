@@ -5,10 +5,10 @@ class ViewSettings
 {
     protected int $year;
     protected ?int $month;
-    protected ?ViewType $view_type;
-    protected ?WeekStartDate $week_start_date;
+    protected string $view_type;
+    protected string $week_start_date;
 
-    public function __construct(int  $year, ?int $month, ?ViewType $type, ?WeekStartDate $start)
+    public function __construct(int  $year, ?int $month, string $type, string $start)
     {
         $this->year = $year;
         $this->month = $month;
@@ -16,34 +16,22 @@ class ViewSettings
         $this->week_start_date = $start;
     }
 
-    /**
-     * @return int
-     */
     public function getYear(): int
     {
         return $this->year;
     }
 
-    /**
-     * @return int
-     */
     public function getMonth(): int
     {
         return $this->month;
     }
 
-    /**
-     * @return ViewType
-     */
-    public function getViewType(): ViewType
+    public function getViewType(): string
     {
         return $this->view_type;
     }
 
-    /**
-     * @return WeekStartDate
-     */
-    public function getWeekStartDate(): WeekStartDate
+    public function getWeekStartDate(): string
     {
         return $this->week_start_date;
     }

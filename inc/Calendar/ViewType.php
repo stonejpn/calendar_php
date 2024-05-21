@@ -1,8 +1,8 @@
 <?php
 namespace Calendar;
 
-enum ViewType
+class ViewType
 {
-    case Year;
-    case Month;
+    public const YEAR = 'year';
+    public const MONTH = 'month';
 }

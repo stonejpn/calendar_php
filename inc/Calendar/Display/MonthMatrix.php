@@ -55,7 +55,7 @@ class MonthMatrix
         $day_of_week = (int) $first_day->format('w');
 
         // １日までを空白セルで埋める
-        $filler_count = ($settings->getWeekStartDate() === WeekStartDate::Monday)
+        $filler_count = ($settings->getWeekStartDate() === WeekStartDate::MONDAY)
             ? ($day_of_week + 6) % 7 : $day_of_week;
         for ($i = 0; $i < $filler_count; $i++) {
             $this->matrix[] = new DateCell(0, 0);
@@ -84,7 +84,7 @@ class MonthMatrix
         print <<<EOD
 <div class="month-matrix">
 EOD;
-        if ($settings->getViewType() === ViewType::Year) {
+        if ($settings->getViewType() === ViewType::YEAR) {
             // 年間カレンダーでは、月名と月別カレンダーへのリンクを表示
             print <<<EOD
 <div class="month-name"><a href="/{$settings->getYear()}/{$settings->getMonth()}">{$settings->getMonth()}月</a></div>
