@@ -1,0 +1,191 @@
+@charset "UTF-8";
+
+body {
+    line-height: 135%;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.title {
+    font-size: 24px;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    text-align: center;
+}
+
+.switcher {
+    margin: 1rem;
+}
+
+.container-month {
+    margin-left: 10%;
+    width: 80%;
+    min-width: 640px;
+}
+
+.container-year {
+    margin-left: 5%;
+    width: 90%;
+    min-width: 960px;
+}
+
+.container ul {
+    /* width: 100%; */
+    margin-left: 1rem;
+    padding-left: 0; /* デフォルトが40pxに設定されているで上書きする */
+}
+
+/* 「今月を表示」のリンク */
+.container .current-month {
+    position: absolute;
+    top: 1rem;
+}
+
+.container-year .current-month {
+    right: 7%;
+}
+
+.container-month .current-month {
+    right: 12%;
+}
+
+/* 前の月、次の月 */
+.container ul.navi {
+    display: flex;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.container ul.navi li {
+    display: inline-block;
+    flex: 1 1 0;
+}
+
+.container ul.navi li.year {
+    text-align: center;
+}
+
+.container ul.navi li.next {
+    text-align: right;
+}
+
+/* 曜日の表示 */
+.container ul.day-of-week-header {
+    display: flex;
+    margin-left: 0;
+    margin-bottom: 0.4rem;
+    border-top: #BBBBBB 1px solid;
+    border-left: #BBBBBB 1px solid;
+    border-bottom: #BBBBBB 1px solid;
+}
+
+.container ul.day-of-week-header li {
+    display: inline-block;
+    text-align: center;
+    padding: 0.4rem 0;
+    flex: 1 1 0;
+    border-right: #BBBBBB 1px solid;
+}
+
+.container ul.day-of-week-header li.sunday {
+    background-color: #FFDDDD;
+}
+.container ul.day-of-week-header li.saturday {
+    background-color: #DDDDFF;
+}
+
+/* カレンダーマトリックス */
+.month-matrix ul.week {
+    display: flex;
+    margin: 0;
+    border-top: #BBBBBB 1px solid;
+    border-left: #BBBBBB 1px solid;
+    border-right: #BBBBBB 1px solid;
+}
+
+.month-matrix ul:last-child {
+    border-bottom: #BBBBBB 1px solid;
+}
+
+/* 日付セル */
+.month-matrix ul.week li {
+    display: inline-block;
+    flex: 1 1 0;
+    border-right: #BBBBBB 1px solid;
+}
+/* 最後のセルには、右のborderはいらない */
+.month-matrix ul.week li:last-child {
+    border-right-width: 0;
+}
+
+.container-month ul.week li div.day-of-month {
+    padding: 0.4rem 1rem;
+    font-size: 14px;
+}
+
+.container ul.week li.sunday {
+    background-color: #FFEEEE;
+}
+
+.container ul.week li.saturday {
+    background-color: #EEEEFF;
+}
+
+.container ul.week li.holiday {
+    background-color: #FFEEEE;
+}
+
+div.month-matrix ul.week .holiday-name {
+    display: inline-block;
+    padding: 0 1rem 1rem;
+    font-size: 12px;
+    color: orangered;
+}
+
+/* 日付マス 一番下のマス */
+.container ul.week li.last-week {
+    /* border-bottom: #BBBBBB 1px solid; */
+}
+
+/* 年間カレンダー */
+.container-year .year-row {
+    display: flex;
+    font-size: 12px;
+}
+
+.container-year div.year-row div.month-matrix {
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+
+    flex: 1 1 0;
+}
+
+.container-year div.year-row div.month-matrix div.month-name {
+    text-align: center;
+    font-size: 14px;
+    margin: 0.4rem;
+}
+
+.container-year ul.week li .day-of-month {
+    padding: 0.2rem 0.5rem 1rem;
+    font-size: 12px;
+}
+
+.container-year ul.week li .holiday-name {
+    display: none;
+}
+
+/* エラー画面 */
+div.error {
+    margin: 1rem;
+    color: lightcoral;
+}
