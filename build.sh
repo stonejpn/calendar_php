@@ -6,4 +6,4 @@ if [ ! -f docker/Dockerfile ]; then
   exit 1
 fi
 cd docker
-docker build -t php-app .
+docker build -t calendar-php .
